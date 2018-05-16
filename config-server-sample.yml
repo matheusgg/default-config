@@ -1,0 +1,36 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      override-none: true
+      override-system-properties: false
+      server:
+        git:
+          repos:
+            team1:
+              pattern: team1-*
+              uri: https://github.com/matheusgg/team1.git
+              clone-on-start: true
+              force-pull: true
+              basedir: '${user.home}/${spring.application.name}/csp'
+            team2:
+              pattern: team2-*
+              uri: https://github.com/matheusgg/team2.git
+              clone-on-start: true
+              force-pull: true
+              basedir: '${user.home}/${spring.application.name}/mib'
+
+logging:
+  level:
+    org.springframework.cloud.config.server.encryption: error
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    env:
+      enabled: false
